@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Mother's Day, My Mother!</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #fce4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      text-align: center;
+    }
+
+    /* Gift Box */
+    .point {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(180deg, #f4e236 0%, #fd1d1d 100%);
+      border-radius: 10px;
+      margin: auto;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      display: inline-block;
+      text-align: center;
+      font-size: 50px;
+      line-height: 100px;
+      color: white;
+      background-color: #ff6b81;
+    }
+
+    .point:hover {
+      transform: scale(1.1);
+    }
+
+    .hidden-content {
+      display: none;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding-top: 100px;
+    }
+
+    .message {
+      font-size: 26px;
+      color: #54042c;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out forwards;
+      opacity: 0;
+      animation-delay: 1s;
+    }
+
+    .love-message {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #4a042b;
+      background-color: #fff5f8;
+      border-radius: 15px;
+      opacity: 0;
+      animation: fadeIn 2s ease-out forwards;
+      animation-delay: 2s;
+      line-height: 1.5;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    #flowerContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container" id="giftContainer">
+    <!-- Change the flower to gift box here -->
+    <div class="point" id="giftBox">🎁</div>
+  </div>
+
+  <div class="hidden-content" id="hiddenContent">
+    <div id="flowerContainer"></div>
+    <div class="message">Happy Mother's Day, Super Mom! 💖</div>
+    <div class="love-message" id="loveMessage"></div>
+  </div>
+
+  <script>
+    const giftBox = document.getElementById("giftBox");
+    const hiddenContent = document.getElementById("hiddenContent");
+    const flowerContainer = document.getElementById("flowerContainer");
+    const loveMessage = document.getElementById("loveMessage");
+
+    giftBox.addEventListener("click", () => {
+      document.getElementById("giftContainer").style.display = "none";
+      hiddenContent.style.display = "block";
+      showFlowers();
+      showMessage();
+    });
+
+    // Function to show floating flowers after the gift box is clicked
+    function showFlowers() {
+      const flowerEmoji = "🌸"; // Flower emoji that will float
+      const total = 30; // Number of flowers to appear
+
+      for (let i = 0; i < total; i++) {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerText = flowerEmoji;
+        
+        flower.style.left = Math.random() * 100 + "vw";  // Random horizontal position
+        flower.style.bottom = "0";  // Start at the bottom of the screen
+        flower.style.fontSize = (Math.random() * 20 + 20) + "px"; // Random size
+        flower.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+        flowerContainer.appendChild(flower);
+
+        // Start animation with opacity and floating effect after click
+        setTimeout(() => {
+          flower.style.opacity = "1";  // Make the flower visible
+          flower.style.animation = "floatUp 5s linear forwards"; // Start floating effect
+        }, 100);
+
+        setTimeout(() => {
+          flower.remove();  // Remove flower after animation completes
+        }, 6000);
+      }
+    }
+
+    // Display the personalized message after the gift box is clicked
+    function showMessage() {
+      loveMessage.innerText = 
+        "This is for you, Mother, my loving and beautiful mother. " + 
+        "Happy Mother's Day mommy. I love You. " + 
+        " Thank you for being always supportive  ❤️";
+    }
+  </script>
+</body>
+</html>
